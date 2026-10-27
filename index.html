@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G6 | Recursive Descent Parser</title>
+<link rel="stylesheet" href="style.css"></head>
+<body><div class="wrap">
+<header class="top"><div class="brand"><div class="logo">G6</div><div><div class="eyebrow">Compiler Design Lab · 2026–27</div><h1>Recursive Descent Parser</h1></div></div></header>
+<section class="hero"><h2>Understand how an expression<br><span>gets parsed.</span></h2><p>Enter an arithmetic expression to see lexical analysis, syntax validation, token details, and error positions.</p><div class="chips"><span class="chip">Lexical Analysis</span><span class="chip">Context-Free Grammar</span><span class="chip">Operator Precedence</span><span class="chip">Error Detection</span></div></section>
+<div class="grid"><section class="card"><div class="cardhead"><h3>Expression Input</h3><span class="small">Try a valid or invalid input</span></div><div class="body"><label class="label" for="expression">ARITHMETIC EXPRESSION</label><div class="inputrow"><input id="expression" class="input" value="a + 12 * (b - 3)" maxlength="900" spellcheck="false" autocomplete="off"><button id="parseBtn" class="primary" onclick="parseExpression()">▶ Parse</button></div><div class="examples"><button class="example" onclick="setExpr('a+b*c')">a+b*c</button><button class="example" onclick="setExpr('(a+b)*c')">(a+b)*c</button><button class="example" onclick="setExpr('25.5*4+10')">25.5*4+10</button><button class="example" onclick="setExpr('a + * b')">a + * b</button><button class="example" onclick="setExpr('(a+b')">(a+b</button><button class="example" onclick="setExpr('a+b@c')">a+b@c</button></div><p class="hint">Supports identifiers, integer/decimal numbers, + − × ÷ and nested parentheses. This project validates syntax; it does not calculate the final value.</p></div><div class="cardhead"><h3>Parsing Result</h3><span id="resultTag" class="small">Waiting for input</span></div><div class="resultbox"><div id="status" class="status idle"><span class="dot"></span><span>Ready to parse</span></div><div id="message" class="substatus">Run an expression to see parser output.</div><div class="metrics"><div class="metric"><b id="tokens">—</b><span>Tokens detected</span></div><div class="metric"><b id="errors">—</b><span>Syntax errors</span></div><div class="metric"><b id="resultMini">—</b><span>Parser result</span></div></div></div></section>
+<section class="card"><div class="cardhead"><h3>Parsing Results</h3><span class="small">Live output from the parser</span></div><div class="tabs"><button class="tab active" data-tab="all" onclick="switchTab('all',this)">Parser Output</button><button class="tab" data-tab="tokens" onclick="switchTab('tokens',this)">Token Analysis</button></div><div class="console"><pre id="output"><span class="placeholder">$ parser --ready
+
+Parser output will appear here after you parse an expression.
+
+Try: a + 12 * (b - 3)</span></pre></div></section></div>
+<section class="section card"><div class="cardhead"><h3>Grammar & Operator Precedence</h3><span class="small">Grammar used by the parser</span></div><div class="body grammar"><pre>E  → T E′
+E′ → + T E′ | - T E′ | ε
+T  → F T′
+T′ → * F T′ | / F T′ | ε
+F  → (E) | id | number</pre><div><b style="color:var(--cyan)">Precedence order</b><p class="note">1. Parentheses — highest<br>2. Multiplication and division<br>3. Addition and subtraction — lowest</p><p class="note">The grammar removes left recursion so each non-terminal can be implemented as a recursive-descent function.</p></div></div></section>
+<div class="footer">G6 · Recursive Descent Parser for Arithmetic Expressions · Standalone HTML, CSS & JavaScript</div></div>
+
+<script src="script.js" defer></script></body></html>
